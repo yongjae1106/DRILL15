@@ -44,7 +44,10 @@ class Zombie:
             self.dir = -1
         elif self.x < MIN_X:
             self.dir = 1
-        self.x = clamp(MIN_X, self.x, MAX_X)
+        if self.hp == 1:
+            self.y = 100
+        if self.dir < 0:
+            self.x = clamp(MIN_X, self.x, MAX_X)
 
     def draw(self):
         image = Zombie.images['Walk'][int(self.frame)]
@@ -55,7 +58,7 @@ class Zombie:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - self.hp * 50, self.y - self.hp * 50, self.x + self.hp * 50, self.y + self.hp * 50
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
