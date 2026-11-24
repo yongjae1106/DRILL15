@@ -31,6 +31,7 @@ class Zombie:
 
     def __init__(self):
         self.load_images()
+        self.hp = 2
         self.x, self.y = random.randint(MIN_X, MAX_X), 150
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1, 1])
@@ -58,6 +59,9 @@ class Zombie:
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
-            pass
+            if self.hp == 2:
+                self.hp -= 1 
+            elif self.hp == 1:
+                game_world.remove_object(self)
         if group == 'zombie:boy':
             exit
