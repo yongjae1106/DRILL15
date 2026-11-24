@@ -49,9 +49,9 @@ class Zombie:
     def draw(self):
         image = Zombie.images['Walk'][int(self.frame)]
         if self.dir < 0:
-            image.composite_draw(0, 'h', self.x, self.y, 200, 200)
+            image.composite_draw(0, 'h', self.x, self.y, self.hp * 100, self.hp * 100)
         else:
-            image.draw(self.x, self.y, 200, 200)
+            image.draw(self.x, self.y, self.hp * 100, self.hp * 100)
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
